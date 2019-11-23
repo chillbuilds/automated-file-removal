@@ -1,27 +1,35 @@
 const fs = require("fs");
-const moment = require("moment");
 const fileArr = [];
 const dir = "./test-files/";
-// const dir = `C:/Users/Master William/Pictures/`;
-const time = moment().format();
-const monthAgo = moment().subtract(30, 'days').format();
+// const dir = "";
+var date = new Date();
+const month = date.getMonth();
+const day = date.getDate();
 
 //gather file names from 'order assets' and push into array
 fs.readdirSync(dir).forEach(file => {
     fileArr.push(file);
   });
-  
+
 //loop through files in dir
   for(var i = 0; i < fileArr.length; i++){
-      let x = fileArr[i];
-    fs.stat(`${dir}${fileArr[i]}`, function(err, stats, i) {
-        if(stats.isFile() === true){
-        console.log(stats.atime);
-        console.log(x);
-    }
-        //stats.atime
+    fs.stat(`${dir}${fileArr[i]}`, function(err, stats) {
+      if(stats.isFile() === true){
+        let imgMonth = stats.atime.getMonth();
+        let imgDay = stats.atime.getDate();
+        if(imgMonth === month){return}
+        else{
+          
+        }
+      }
     });
   }
+console.log(month + "-" + day);
 
-console.log(time)
-console.log(monthAgo);
+let expDate = month - 1;
+console.log(expDate);
+
+// let expDate = day - 30;
+// if(expDate < 1){
+//   expDate = expDate - expDate * 2; //format returned expiration date;
+// }
