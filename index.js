@@ -18,15 +18,10 @@ fs.readdirSync(dir).forEach(file => {
       if(stats.isFile() === true){
         let imgMonth = stats.atime.getMonth()+1;
         let imgDay = stats.atime.getDate();
-        console.log(imgMonth);
-        console.log(imgDay);
         if(imgMonth === month){return}
         else{
          if(imgDay < day){
-          fs.unlinkSync(filePath);
-         }
-        }
-      }
+          fs.unlinkSync(filePath);}
+        }}
     });
   }
-console.log(month + "-" + day);
